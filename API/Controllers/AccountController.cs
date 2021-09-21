@@ -62,6 +62,7 @@ namespace API.Controllers
                 if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Wrong password");
             }
 
+
             return new UserDto
             {
                 Username = user.UserName,
