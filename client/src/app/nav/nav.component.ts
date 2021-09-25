@@ -37,5 +37,4 @@ export class NavComponent implements OnInit {
       console.log(error);
     })
   }
-
 }
