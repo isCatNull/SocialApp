@@ -1,16 +1,28 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container">
         <a class="navbar-brand" href="#">Amazing page heh?</a>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Interests</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Lists</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Messages</a>
-            </li>
-          <form #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" 
+            <ul class="navbar-nav mr-auto" *ngIf="loggedIn">
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="color:#bfbfbf">Interests</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="color:#bfbfbf">Lists</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="color:#bfbfbf">Messages</a>
+              </li>
+            </ul>
+
+            <div class="dropdown" *ngIf="loggedIn" dropdown>
+              <a class="dropdown-toggle text-light" dropdownToggle>Welcome to the page!</a>
+              <div class="dropdown-menu mt-3" *dropdownMenu>
+                <a class="dropdown-item">Edit profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" (click)="logout()">Logout</a>
+              </div>
+            </div>
+
+          <form *ngIf="!loggedIn" #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" 
             autocomplete="off">
             <input
                 name="username"
