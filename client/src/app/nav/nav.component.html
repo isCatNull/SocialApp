@@ -2,19 +2,21 @@
     <div class="container">
         <a class="navbar-brand" routerLink='/' routerLinkActive='active'>Knock-Off Social App</a>
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" routerLink='/members' routerLinkActive='active'>Friends</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink='/lists' routerLinkActive='active'>Lists</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink='/messages' routerLinkActive='active'>Messages</a>
-              </li>
+              <ng-container *ngIf="accountService.currentUser$ | async">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink='/members' routerLinkActive='active'>Friends</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink='/lists' routerLinkActive='active'>Lists</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink='/messages' routerLinkActive='active'>Messages</a>
+                </li>
+              </ng-container>
             </ul>
 
-            <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
-              <a class="dropdown-toggle text-light" dropdownToggle>Welcome to the page!</a>
+            <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+              <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.username | titlecase}}</a>
               <div class="dropdown-menu mt-3" *dropdownMenu>
                 <a class="dropdown-item">Edit profile</a>
                 <div class="dropdown-divider"></div>
@@ -36,7 +38,7 @@
                 class="form-control mr-sm" 
                 type="password" 
                 placeholder="Password">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
           </form>
         </div>        
   </nav>
