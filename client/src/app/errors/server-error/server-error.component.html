@@ -1,0 +1,6 @@
+<p>Internal server error - try to refresh page</p>
+<ng-container *ngIf="error">
+    <h5 class='text-danger'>Error: {{error.message}}</h5>
+    <p class="font-weight-bold">Something exploded at the back end...</p>
+    <code class="mt-5" style="background-color: azure;">{{error.details}}</code>
+</ng-container>
