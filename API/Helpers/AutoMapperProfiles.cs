@@ -1,6 +1,8 @@
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using AutoMapper;
+using System.Linq;
 
 namespace API.Helpers
 {
@@ -8,7 +10,14 @@ namespace API.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<AppUser, MemberDto>();
+            CreateMap<AppUser, MemberDto>()
+                .ForMember(destination => destination.PhotoUrl, 
+                     options => options.MapFrom(
+                     source => source.Photos.FirstOrDefault(
+                     photo => photo.IsMain).Url))
+                    .ForMember(destination => destination.Age, 
+                        options => options.MapFrom(
+                        source => source.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoDto>();
         }
     }
